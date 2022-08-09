@@ -1,0 +1,56 @@
+{
+    "name": "sertxudeveloper/laravel-lock-screen",
+    "description": "Package for locking the user account due to inactivity",
+    "keywords": [
+        "sertxudeveloper",
+        "laravel",
+        "laravel-lock-screen"
+    ],
+    "homepage": "https://github.com/sertxudeveloper/laravel-lock-screen",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sergio Peris",
+            "email": "dev.sertxu@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "illuminate/contracts": "^9.5",
+        "illuminate/database": "^9.5",
+        "illuminate/support": "^9.5"
+    },
+    "require-dev": {
+        "nunomaduro/collision": "^6.0",
+        "orchestra/testbench": "^7.5",
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "SertxuDeveloper\\LockScreen\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SertxuDeveloper\\LockScreen\\Tests\\": "tests",
+            "SertxuDeveloper\\LockScreen\\Tests\\Database\\Factories\\": "tests/database/factories"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "SertxuDeveloper\\LockScreen\\LockScreenServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
