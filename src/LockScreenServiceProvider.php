@@ -4,7 +4,7 @@ namespace SertxuDeveloper\LockScreen;
 
 use Illuminate\Support\ServiceProvider;
 
-class MediaServiceProvider extends ServiceProvider
+class LockScreenServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
@@ -22,6 +22,7 @@ class MediaServiceProvider extends ServiceProvider
      */
     public function register(): void {
         $this->mergeConfigFrom(__DIR__.'/../config/lockscreen.php', 'lockscreen');
+        $this->registerMiddleware();
     }
 
     /**
@@ -33,5 +34,20 @@ class MediaServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../config/lockscreen.php' => config_path('lockscreen.php'),
         ], 'config');
+    }
+
+    /**
+     * Register the middleware.
+     * 
+     * @return void
+     */
+    protected function registerMiddleware(): void {
+        $this->app->bind(LockScreen::class, function ($app) {
+            return new LockScreen(
+                $app[ResponseFactory::class],
+                $app[UrlGenerator::class],
+                $app['config']->get('lockscreen.ttl'),
+            );
+        });
     }
 }
