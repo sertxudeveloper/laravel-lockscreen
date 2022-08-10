@@ -3,6 +3,7 @@
 namespace SertxuDeveloper\LockScreen;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Routing\Router;
 
 class LockScreenServiceProvider extends ServiceProvider
 {
@@ -11,8 +12,10 @@ class LockScreenServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(): void {
+    public function boot(Router $router): void {
         $this->registerPublishables();
+
+        $router->aliasMiddleware('auth.user', LockScreen::class);
     }
 
     /**

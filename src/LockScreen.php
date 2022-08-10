@@ -21,7 +21,7 @@ class LockScreen
     public function __construct(
         protected ResponseFactory $responseFactory,
         protected UrlGenerator $urlGenerator,
-        protected int $passwordTimeout = 7200,
+        protected ?int $passwordTimeout = null,
     ) {}
 
     /**
@@ -63,6 +63,6 @@ class LockScreen
     protected function shouldConfirmPassword(Request $request, int $passwordTimeoutSeconds = null): bool {
         $confirmedAt = time() - $request->session()->get('auth.latest_activity_at', 0);
 
-        return $confirmedAt > ($passwordTimeoutSeconds ?? $this->passwordTimeout);
+        return $confirmedAt > ($passwordTimeoutSeconds ?? $this->passwordTimeout ?? config('lockscreen.ttl'));
     }
 }
