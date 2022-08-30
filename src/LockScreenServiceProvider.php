@@ -15,7 +15,7 @@ class LockScreenServiceProvider extends ServiceProvider
     public function boot(Router $router): void {
         $this->registerPublishables();
 
-        $router->aliasMiddleware('auth.user', LockScreen::class);
+        $router->aliasMiddleware('lockscreen', LockScreen::class);
     }
 
     /**
