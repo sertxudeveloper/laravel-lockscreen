@@ -3,6 +3,8 @@
 namespace SertxuDeveloper\LockScreen;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Contracts\Routing\UrlGenerator;
 use Illuminate\Routing\Router;
 
 class LockScreenServiceProvider extends ServiceProvider

@@ -7,9 +7,21 @@ use Illuminate\Http\Request;
 use Orchestra\Testbench\TestCase as Orchestra;
 use SertxuDeveloper\LockScreen\LockScreenServiceProvider;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
+use Illuminate\Contracts\Session\Session;
 
 class TestCase extends Orchestra
 {
+    /**
+     * Setup the test environment.
+     *
+     * @return void
+     */
+    protected function setUp(): void {
+        parent::setUp();
+    
+        //$this->withFactories(__DIR__ . '/database/factories');
+    }
+
     /**
      * Define database migrations.
      *
@@ -39,8 +51,11 @@ class TestCase extends Orchestra
      * @return Request
      */
     public function createRequest(string $method, string $uri): Request {
-        $request = SymfonyRequest::create($uri, $method);
+        $symfonyRequest = SymfonyRequest::create($uri, $method);
 
-        return Request::createFromBase($request);
+        $request = Request::createFromBase($symfonyRequest);
+        $request->setLaravelSession(app(Session::class));
+
+        return $request;
     }
 }

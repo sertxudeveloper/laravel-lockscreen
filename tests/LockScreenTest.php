@@ -2,13 +2,16 @@
 
 namespace SertxuDeveloper\LockScreen\Tests;
 
-use Illuminate\Foundation\Auth\User;
+use SertxuDeveloper\LockScreen\LockScreen;
+use SertxuDeveloper\LockScreen\Tests\Models\User;
 use Illuminate\Http\Response;
 
 class LockScreenTest extends TestCase
 {
     /**
-     * Check if the user stores in session the last activity timesyamp.
+     * Check if the user stores in session the last activity timestamp.
+     * 
+     * @return void
      */
     public function test_user_stores_last_activity_timestamp(): void {
         $user = User::factory()->create();
@@ -16,13 +19,16 @@ class LockScreenTest extends TestCase
 
         $middleware = app(LockScreen::class);
 
-        $response = $middleware->handle(
-            $request = $this->createRequest('get', '/'),
-            fn () => new Response()
-        );
+        $request = $this->createRequest('get', '/');
         
         $this->assertFalse($request->session()->has('auth.latest_activity_at'));
+
+        $response = $middleware->handle(
+            $request,
+            fn () => new Response()
+        );
+
         $this->assertTrue($response->isSuccessful());
-        $this->assertTrue($response->session()->has('auth.latest_activity_at'));
+        $this->assertTrue($request->session()->has('auth.latest_activity_at'));
     }
 }
