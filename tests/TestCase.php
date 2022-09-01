@@ -41,8 +41,8 @@ class TestCase extends Orchestra
      * @param  string  $uri
      * @return Request
      */
-    public function createRequest(string $method, string $uri): Request {
-        $symfonyRequest = SymfonyRequest::create($uri, $method);
+    public function createRequest(string $method, string $uri, array $headers = []): Request {
+        $symfonyRequest = SymfonyRequest::create($uri, $method, server: $headers);
 
         $request = Request::createFromBase($symfonyRequest);
         $request->setLaravelSession(app(Session::class));

@@ -6,6 +6,7 @@ use SertxuDeveloper\LockScreen\LockScreen;
 use SertxuDeveloper\LockScreen\Tests\Models\User;
 use Illuminate\Http\Response;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\JsonResponse;
 
 class LockScreenTest extends TestCase
 {
@@ -97,13 +98,43 @@ class LockScreenTest extends TestCase
             fn () => new Response()
         );
 
-        //$this->assertTrue($response->isSuccessful());
-        //$this->assertRedirect(route('auth.locked'));
-
-        //$response->assertStatus(302);
-
         $this->assertEquals(302, $response->status());
         $this->assertInstanceOf(RedirectResponse::class, $response);
         $this->assertEquals(route('auth.locked'), $response->headers->get('location'));
+    }
+
+    /**
+     * Check if the account locks if the user last activity exceeds the specified TTL (JSON response).
+     * 
+     * @return void
+     */
+    public function test_account_locks_exceeded_ttl_json(): void {
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $middleware = app(LockScreen::class);
+
+        $request = $this->createRequest('get', '/', [
+            'HTTP_ACCEPT' => 'application/json',
+        ]);
+
+        $response = $middleware->handle(
+            $request,
+            fn () => new Response()
+        );
+
+        $this->assertTrue($response->isSuccessful());
+        $this->assertTrue($request->session()->has('auth.latest_activity_at'));
+
+        $this->travelTo(now()->addSeconds(config('lockscreen.ttl') + 1));
+
+        $response = $middleware->handle(
+            $request,
+            fn () => new Response()
+        );
+
+        $this->assertEquals(423, $response->status());
+        $this->assertInstanceOf(JsonResponse::class, $response);
+        $this->assertIsObject(json_decode($response->content()));
     }
 }
