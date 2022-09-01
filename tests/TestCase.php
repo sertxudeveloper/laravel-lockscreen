@@ -8,19 +8,10 @@ use Orchestra\Testbench\TestCase as Orchestra;
 use SertxuDeveloper\LockScreen\LockScreenServiceProvider;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 use Illuminate\Contracts\Session\Session;
+use Illuminate\Routing\Router;
 
 class TestCase extends Orchestra
 {
-    /**
-     * Setup the test environment.
-     *
-     * @return void
-     */
-    protected function setUp(): void {
-        parent::setUp();
-    
-        //$this->withFactories(__DIR__ . '/database/factories');
-    }
 
     /**
      * Define database migrations.
@@ -57,5 +48,16 @@ class TestCase extends Orchestra
         $request->setLaravelSession(app(Session::class));
 
         return $request;
+    }
+
+    /**
+     * Define routes setup.
+     *
+     * @param  Router  $router
+     *
+     * @return void
+     */
+    protected function defineRoutes($router): void {
+        $router->get('locked', fn () => "Account locked")->name('auth.locked');
     }
 }

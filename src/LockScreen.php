@@ -47,7 +47,7 @@ class LockScreen
                 );
             }
 
-            $request->session()->put('auth.latest_activity_at', time());
+            $request->session()->put('auth.latest_activity_at', now()->timestamp);
         }
 
         return $next($request);
@@ -63,7 +63,7 @@ class LockScreen
     protected function shouldConfirmPassword(Request $request, int $passwordTimeoutSeconds = null): bool {
         if (!$request->session()->has('auth.latest_activity_at')) return false;
 
-        $confirmedAt = time() - $request->session()->get('auth.latest_activity_at', 0);
+        $confirmedAt = now()->timestamp - $request->session()->get('auth.latest_activity_at', 0);
 
         return $confirmedAt > ($passwordTimeoutSeconds ?? $this->passwordTimeout ?? config('lockscreen.ttl'));
     }
