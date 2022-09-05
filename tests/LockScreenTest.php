@@ -12,7 +12,7 @@ class LockScreenTest extends TestCase
 {
     /**
      * Check if the user stores in session the last activity timestamp.
-     * 
+     *
      * @return void
      */
     public function test_user_stores_last_activity_timestamp(): void {
@@ -22,7 +22,7 @@ class LockScreenTest extends TestCase
         $middleware = app(LockScreen::class);
 
         $request = $this->createRequest('get', '/');
-        
+
         $this->assertFalse($request->session()->has('auth.latest_activity_at'));
 
         $response = $middleware->handle(
@@ -36,7 +36,7 @@ class LockScreenTest extends TestCase
 
     /**
      * Check if the acount does not lock if the user interacts with the app.
-     * 
+     *
      * @return void
      */
     public function test_account_not_locked_if_using_app(): void {
@@ -72,7 +72,7 @@ class LockScreenTest extends TestCase
 
     /**
      * Check if the account locks if the user last activity exceeds the specified TTL.
-     * 
+     *
      * @return void
      */
     public function test_account_locks_exceeded_ttl(): void {
@@ -100,12 +100,12 @@ class LockScreenTest extends TestCase
 
         $this->assertEquals(302, $response->status());
         $this->assertInstanceOf(RedirectResponse::class, $response);
-        $this->assertEquals(route('auth.locked'), $response->headers->get('location'));
+        $this->assertEquals(route('locked'), $response->headers->get('location'));
     }
 
     /**
      * Check if the account locks if the user last activity exceeds the specified TTL (JSON response).
-     * 
+     *
      * @return void
      */
     public function test_account_locks_exceeded_ttl_json(): void {

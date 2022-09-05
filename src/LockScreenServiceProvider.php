@@ -18,6 +18,7 @@ class LockScreenServiceProvider extends ServiceProvider
         $this->registerPublishables();
 
         $router->aliasMiddleware('lockscreen', LockScreen::class);
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'lockscreen');
     }
 
     /**
@@ -43,7 +44,7 @@ class LockScreenServiceProvider extends ServiceProvider
 
     /**
      * Register the middleware.
-     * 
+     *
      * @return void
      */
     protected function registerMiddleware(): void {

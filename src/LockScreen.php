@@ -15,7 +15,7 @@ class LockScreen
      *
      * @param  ResponseFactory  $responseFactory
      * @param  UrlGenerator  $urlGenerator
-     * @param  int  $passwordTimeout
+     * @param  int|null  $passwordTimeout
      * @return void
      */
     public function __construct(
@@ -41,9 +41,9 @@ class LockScreen
                         'message' => 'Account locked due to inactivity, log in again.',
                     ], 423);
                 }
-    
+
                 return $this->responseFactory->redirectGuest(
-                    $this->urlGenerator->route($redirectToRoute ?? 'auth.locked')
+                    $this->urlGenerator->route($redirectToRoute ?? 'locked')
                 );
             }
 

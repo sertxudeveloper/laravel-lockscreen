@@ -36,7 +36,7 @@ class TestCase extends Orchestra
 
     /**
      * Creates a custom request based on the provided method and URI.
-     * 
+     *
      * @param  string  $method
      * @param  string  $uri
      * @return Request
@@ -58,6 +58,6 @@ class TestCase extends Orchestra
      * @return void
      */
     protected function defineRoutes($router): void {
-        $router->get('locked', fn () => "Account locked")->name('auth.locked');
+        $router->get('locked', fn () => "Account locked")->name('locked');
     }
 }
