@@ -56,7 +56,7 @@ class InstallCommand extends Command
         $original = file_get_contents($originalFile);
 
         if (!str_contains($original, $content)) {
-            file_put_contents($originalFile, $original . $content);
+            file_put_contents($originalFile, $original.$content);
         }
     }
 

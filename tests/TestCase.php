@@ -2,17 +2,16 @@
 
 namespace SertxuDeveloper\LockScreen\Tests;
 
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Router;
 use Orchestra\Testbench\TestCase as Orchestra;
 use SertxuDeveloper\LockScreen\LockScreenServiceProvider;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
-use Illuminate\Contracts\Session\Session;
-use Illuminate\Routing\Router;
 
 class TestCase extends Orchestra
 {
-
     /**
      * Define database migrations.
      *
@@ -54,10 +53,9 @@ class TestCase extends Orchestra
      * Define routes setup.
      *
      * @param  Router  $router
-     *
      * @return void
      */
     protected function defineRoutes($router): void {
-        $router->get('locked', fn () => "Account locked")->name('locked');
+        $router->get('locked', fn () => 'Account locked')->name('locked');
     }
 }

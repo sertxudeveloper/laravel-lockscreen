@@ -22,7 +22,8 @@ class LockScreen
         protected ResponseFactory $responseFactory,
         protected UrlGenerator $urlGenerator,
         protected ?int $passwordTimeout = null,
-    ) {}
+    ) {
+    }
 
     /**
      * Handle an incoming request.
@@ -69,7 +70,9 @@ class LockScreen
      * @return bool
      */
     protected function shouldConfirmPassword(Request $request, int $passwordTimeoutSeconds = null): bool {
-        if (!$request->session()->has('auth.latest_activity_at')) return false;
+        if (!$request->session()->has('auth.latest_activity_at')) {
+            return false;
+        }
 
         $confirmedAt = now()->timestamp - $request->session()->get('auth.latest_activity_at', 0);
 

@@ -25,6 +25,7 @@ class UnlockableController extends Controller
      *
      * @param  Request  $request
      * @return RedirectResponse
+     *
      * @throws ValidationException
      */
     public function store(Request $request): RedirectResponse {

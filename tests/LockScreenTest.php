@@ -2,11 +2,11 @@
 
 namespace SertxuDeveloper\LockScreen\Tests;
 
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
 use SertxuDeveloper\LockScreen\LockScreen;
 use SertxuDeveloper\LockScreen\Tests\Models\User;
-use Illuminate\Http\Response;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\JsonResponse;
 
 class LockScreenTest extends TestCase
 {
@@ -27,7 +27,7 @@ class LockScreenTest extends TestCase
 
         $response = $middleware->handle(
             $request,
-            fn () => new Response()
+            fn () => new Response
         );
 
         $this->assertTrue($response->isSuccessful());
@@ -49,7 +49,7 @@ class LockScreenTest extends TestCase
 
         $response = $middleware->handle(
             $request,
-            fn () => new Response()
+            fn () => new Response
         );
 
         $this->assertTrue($response->isSuccessful());
@@ -61,7 +61,7 @@ class LockScreenTest extends TestCase
 
         $response = $middleware->handle(
             $request,
-            fn () => new Response()
+            fn () => new Response
         );
 
         $this->assertTrue($response->isSuccessful());
@@ -85,7 +85,7 @@ class LockScreenTest extends TestCase
 
         $response = $middleware->handle(
             $request,
-            fn () => new Response()
+            fn () => new Response
         );
 
         $this->assertTrue($response->isSuccessful());
@@ -95,7 +95,7 @@ class LockScreenTest extends TestCase
 
         $response = $middleware->handle(
             $request,
-            fn () => new Response()
+            fn () => new Response
         );
 
         $this->assertEquals(302, $response->status());
@@ -120,7 +120,7 @@ class LockScreenTest extends TestCase
 
         $response = $middleware->handle(
             $request,
-            fn () => new Response()
+            fn () => new Response
         );
 
         $this->assertTrue($response->isSuccessful());
@@ -130,7 +130,7 @@ class LockScreenTest extends TestCase
 
         $response = $middleware->handle(
             $request,
-            fn () => new Response()
+            fn () => new Response
         );
 
         $this->assertEquals(423, $response->status());
