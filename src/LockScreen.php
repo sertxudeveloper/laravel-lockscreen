@@ -34,6 +34,12 @@ class LockScreen
      * @return mixed
      */
     public function handle(Request $request, Closure $next, string $redirectToRoute = null, int $passwordTimeoutSeconds = null): mixed {
+        /** Bypass the middleware if the account has been already marked as locked */
+        if ($request->session()->pull('auth.locked')) {
+            return $next($request);
+        }
+
+        /** Check if the account needs to be locked */
         if (Auth::check()) {
             if ($this->shouldConfirmPassword($request, $passwordTimeoutSeconds)) {
                 if ($request->expectsJson()) {
@@ -41,6 +47,8 @@ class LockScreen
                         'message' => 'Account locked due to inactivity, log in again.',
                     ], 423);
                 }
+
+                $request->session()->put('auth.locked', true);
 
                 return $this->responseFactory->redirectGuest(
                     $this->urlGenerator->route($redirectToRoute ?? 'locked')

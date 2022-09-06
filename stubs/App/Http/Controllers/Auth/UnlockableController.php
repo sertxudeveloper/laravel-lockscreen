@@ -1,7 +1,8 @@
 <?php
 
-namespace SertxuDeveloper\LockScreen\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,12 +12,12 @@ use Illuminate\View\View;
 class UnlockableController extends Controller
 {
     /**
-     * Show the confirm password view.
+     * Show unlock account view.
      *
      * @return View
      */
     public function show(): View {
-        return view('lockscreen::locked');
+        return view('auth.locked');
     }
 
     /**
@@ -36,7 +37,7 @@ class UnlockableController extends Controller
             ]);
         }
 
-        $request->session()->put('auth.latest_activity_at', time());
+        $request->session()->put('auth.latest_activity_at', now()->timestamp);
 
         return redirect()->intended();
     }

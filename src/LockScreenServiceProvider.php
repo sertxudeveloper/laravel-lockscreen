@@ -2,23 +2,39 @@
 
 namespace SertxuDeveloper\LockScreen;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\Routing\UrlGenerator;
 use Illuminate\Routing\Router;
+use Illuminate\Support\ServiceProvider;
 
 class LockScreenServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
      *
+     * @param  Router  $router
      * @return void
      */
     public function boot(Router $router): void {
-        $this->registerPublishables();
+        $this->registerResources();
+        $this->defineAssetPublishing();
+        $this->offerPublishing();
+        $this->registerCommands();
 
         $router->aliasMiddleware('lockscreen', LockScreen::class);
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'lockscreen');
+
+        if (config('lockscreen.append_middleware')) {
+            $router->pushMiddlewareToGroup('web', LockScreen::class);
+        }
+    }
+
+    /**
+     * Define the asset publishing configuration.
+     *
+     * @return void
+     */
+    public function defineAssetPublishing(): void {
+        //
     }
 
     /**
@@ -27,27 +43,6 @@ class LockScreenServiceProvider extends ServiceProvider
      * @return void
      */
     public function register(): void {
-        $this->mergeConfigFrom(__DIR__.'/../config/lockscreen.php', 'lockscreen');
-        $this->registerMiddleware();
-    }
-
-    /**
-     * Register the publishable resources.
-     *
-     * @return void
-     */
-    protected function registerPublishables(): void {
-        $this->publishes([
-            __DIR__.'/../config/lockscreen.php' => config_path('lockscreen.php'),
-        ], 'config');
-    }
-
-    /**
-     * Register the middleware.
-     *
-     * @return void
-     */
-    protected function registerMiddleware(): void {
         $this->app->bind(LockScreen::class, function ($app) {
             return new LockScreen(
                 $app[ResponseFactory::class],
@@ -55,5 +50,51 @@ class LockScreenServiceProvider extends ServiceProvider
                 $app['config']->get('lockscreen.ttl'),
             );
         });
+
+        $this->configure();
+    }
+
+    /**
+     * Set up the configuration.
+     *
+     * @return void
+     */
+    protected function configure(): void {
+        $this->mergeConfigFrom(__DIR__.'/../config/lockscreen.php', 'lockscreen');
+    }
+
+    /**
+     * Set up the resource publishing groups.
+     *
+     * @return void
+     */
+    protected function offerPublishing(): void {
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__.'/../config/lockscreen.php' => config_path('lockscreen.php'),
+            ], 'lockscreen-config');
+        }
+    }
+
+    /**
+     * Register the Artisan commands.
+     *
+     * @return void
+     */
+    protected function registerCommands(): void {
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                Console\InstallCommand::class,
+            ]);
+        }
+    }
+
+    /**
+     * Register the resources.
+     *
+     * @return void
+     */
+    protected function registerResources(): void {
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'lockscreen');
     }
 }

@@ -1,5 +1,5 @@
 {
-    "name": "sertxudeveloper/laravel-lock-screen",
+    "name": "sertxudeveloper/laravel-lockscreen",
     "description": "Package for locking the user account due to inactivity",
     "keywords": [
         "sertxudeveloper",
