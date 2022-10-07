@@ -16,7 +16,6 @@ class LockScreenServiceProvider extends ServiceProvider
      * @return void
      */
     public function boot(Router $router): void {
-        $this->registerResources();
         $this->defineAssetPublishing();
         $this->offerPublishing();
         $this->registerCommands();
@@ -87,14 +86,5 @@ class LockScreenServiceProvider extends ServiceProvider
                 Console\InstallCommand::class,
             ]);
         }
-    }
-
-    /**
-     * Register the resources.
-     *
-     * @return void
-     */
-    protected function registerResources(): void {
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'lockscreen');
     }
 }
