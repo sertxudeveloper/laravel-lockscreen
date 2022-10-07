@@ -52,7 +52,7 @@ class LockScreen
                 $request->session()->put('auth.locked', true);
 
                 return $this->responseFactory->redirectGuest(
-                    $this->urlGenerator->route($redirectToRoute ?? 'locked')
+                    $this->urlGenerator->route($redirectToRoute ?? config('lockscreen.route', 'locked'))
                 );
             }
 
