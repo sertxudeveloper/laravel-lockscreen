@@ -39,7 +39,6 @@ class InstallCommand extends Command
         // Routes...
         $this->comment('Publishing routes...');
         copy(__DIR__.'/../../stubs/routes/lockscreen.php', base_path('routes/lockscreen.php'));
-        $this->appendToFile(base_path('routes/web.php'), file_get_contents(__DIR__.'/../../stubs/routes/web.stub'));
 
         $this->line('');
         $this->info('The sertxudeveloper/laravel-lockscreen package installed successfully.');

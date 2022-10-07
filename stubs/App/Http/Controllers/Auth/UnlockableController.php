@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
-class UnlockableController extends Controller
+class LockScreenController extends Controller
 {
     /**
      * Show unlock account view.
