@@ -36,7 +36,7 @@ class LockScreen
      */
     public function handle(Request $request, Closure $next, string $redirectToRoute = null, int $passwordTimeoutSeconds = null): mixed {
         /** Bypass the middleware if the request is to the lock screen */
-        if ("/{$request->route()->uri()}" === route(config('lockscreen.route'), absolute: false)) {
+        if ("/{$request->route()?->uri()}" === route(config('lockscreen.route'), absolute: false)) {
             return $next($request);
         }
 
