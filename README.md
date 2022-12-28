@@ -4,7 +4,7 @@
 # Add a lock screen to your Laravel app
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/sertxudeveloper/laravel-lockscreen.svg)](https://packagist.org/packages/sertxudeveloper/laravel-lockscreen)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/sertxudeveloper/laravel-lockscreen/run-tests?label=tests)](https://github.com/sertxudeveloper/laravel-lockscreen/actions?query=workflow%3Arun-tests+branch%3Amain)
+[![run-tests](https://github.com/sertxudeveloper/laravel-lockscreen/actions/workflows/run-tests.yml/badge.svg?branch=main)](https://github.com/sertxudeveloper/laravel-lockscreen/actions/workflows/run-tests.yml)
 [![Codecov Test coverage](https://img.shields.io/codecov/c/github/sertxudeveloper/laravel-lockscreen)](https://app.codecov.io/gh/sertxudeveloper/laravel-lockscreen)
 [![Total Downloads](https://img.shields.io/packagist/dt/sertxudeveloper/laravel-lockscreen.svg)](https://packagist.org/packages/sertxudeveloper/laravel-lockscreen)
 
