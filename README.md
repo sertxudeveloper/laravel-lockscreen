@@ -3,10 +3,7 @@
 
 # Add a lock screen to your Laravel app
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/sertxudeveloper/laravel-lockscreen.svg)](https://packagist.org/packages/sertxudeveloper/laravel-lockscreen)
-[![run-tests](https://github.com/sertxudeveloper/laravel-lockscreen/actions/workflows/run-tests.yml/badge.svg?branch=main)](https://github.com/sertxudeveloper/laravel-lockscreen/actions/workflows/run-tests.yml)
-[![Codecov Test coverage](https://img.shields.io/codecov/c/github/sertxudeveloper/laravel-lockscreen)](https://app.codecov.io/gh/sertxudeveloper/laravel-lockscreen)
-[![Total Downloads](https://img.shields.io/packagist/dt/sertxudeveloper/laravel-lockscreen.svg)](https://packagist.org/packages/sertxudeveloper/laravel-lockscreen)
+![](https://img.shields.io/github/v/release/sertxudeveloper/laravel-lockscreen) ![](https://github.com/sertxudeveloper/laravel-lockscreen/actions/workflows/run-tests.yml/badge.svg) ![](https://img.shields.io/github/license/sertxudeveloper/laravel-lockscreen) ![](https://img.shields.io/librariesio/github/sertxudeveloper/laravel-lockscreen) ![](https://img.shields.io/github/repo-size/sertxudeveloper/laravel-lockscreen) ![](https://img.shields.io/packagist/dt/sertxudeveloper/laravel-lockscreen) ![](https://img.shields.io/github/issues/sertxudeveloper/laravel-lockscreen) ![](https://img.shields.io/packagist/php-v/sertxudeveloper/laravel-lockscreen) [![Codecov Test coverage](https://img.shields.io/codecov/c/github/sertxudeveloper/laravel-lockscreen)](https://app.codecov.io/gh/sertxudeveloper/laravel-lockscreen)
 
 This packages adds the functionality to add a lock screen in your app.
 
