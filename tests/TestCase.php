@@ -14,8 +14,6 @@ class TestCase extends Orchestra
 {
     /**
      * Define database migrations.
-     *
-     * @return void
      */
     protected function defineDatabaseMigrations(): void {
         $this->loadLaravelMigrations();
@@ -35,10 +33,6 @@ class TestCase extends Orchestra
 
     /**
      * Creates a custom request based on the provided method and URI.
-     *
-     * @param  string  $method
-     * @param  string  $uri
-     * @return Request
      */
     public function createRequest(string $method, string $uri, array $headers = []): Request {
         $symfonyRequest = SymfonyRequest::create($uri, $method, server: $headers);
@@ -53,7 +47,6 @@ class TestCase extends Orchestra
      * Define routes setup.
      *
      * @param  Router  $router
-     * @return void
      */
     protected function defineRoutes($router): void {
         $router->get('locked', fn () => 'Account locked')->name('locked');

@@ -23,8 +23,6 @@ class InstallCommand extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return void
      */
     public function handle(): void {
         // Controllers...
@@ -49,7 +47,6 @@ class InstallCommand extends Command
      *
      * @param  string  $originalFile The path of the original file.
      * @param  string  $content The content to be appended.
-     * @return void
      */
     protected function appendToFile(string $originalFile, string $content): void {
         $original = file_get_contents($originalFile);
@@ -61,9 +58,6 @@ class InstallCommand extends Command
 
     /**
      * Publish the provided resource path.
-     *
-     * @param  string  $path
-     * @return void
      */
     protected function publishResource(string $path): void {
         (new Filesystem)->ensureDirectoryExists(resource_path($path));
