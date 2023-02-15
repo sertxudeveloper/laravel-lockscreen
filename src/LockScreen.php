@@ -13,9 +13,6 @@ class LockScreen
     /**
      * Create a new middleware instance.
      *
-     * @param  ResponseFactory  $responseFactory
-     * @param  UrlGenerator  $urlGenerator
-     * @param  int|null  $passwordTimeout
      * @return void
      */
     public function __construct(
@@ -27,12 +24,6 @@ class LockScreen
 
     /**
      * Handle an incoming request.
-     *
-     * @param  Request  $request
-     * @param  Closure  $next
-     * @param  string|null  $redirectToRoute
-     * @param  int|null  $passwordTimeoutSeconds
-     * @return mixed
      */
     public function handle(Request $request, Closure $next, string $redirectToRoute = null, int $passwordTimeoutSeconds = null): mixed {
         /** Bypass the middleware if the request is to the lock screen */
@@ -62,10 +53,6 @@ class LockScreen
 
     /**
      * Determine if the account has been locked due to inactivity.
-     *
-     * @param  Request  $request
-     * @param  int|null  $passwordTimeoutSeconds
-     * @return bool
      */
     protected function shouldConfirmPassword(Request $request, int $passwordTimeoutSeconds = null): bool {
         if (!$request->session()->has('auth.latest_activity_at')) {

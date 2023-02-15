@@ -13,8 +13,6 @@ class LockScreenController extends Controller
 {
     /**
      * Show unlock account view.
-     *
-     * @return View
      */
     public function show(): View {
         return view('auth.locked');
@@ -23,8 +21,6 @@ class LockScreenController extends Controller
     /**
      * Confirm the user's password.
      *
-     * @param  Request  $request
-     * @return RedirectResponse
      *
      * @throws ValidationException
      */
