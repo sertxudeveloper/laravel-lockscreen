@@ -45,8 +45,8 @@ class InstallCommand extends Command
     /**
      * Appends the content to the original file if it has not been already appended.
      *
-     * @param  string  $originalFile The path of the original file.
-     * @param  string  $content The content to be appended.
+     * @param  string  $originalFile  The path of the original file.
+     * @param  string  $content  The content to be appended.
      */
     protected function appendToFile(string $originalFile, string $content): void {
         $original = file_get_contents($originalFile);

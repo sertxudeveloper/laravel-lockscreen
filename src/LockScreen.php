@@ -25,7 +25,7 @@ class LockScreen
     /**
      * Handle an incoming request.
      */
-    public function handle(Request $request, Closure $next, string $redirectToRoute = null, int $passwordTimeoutSeconds = null): mixed {
+    public function handle(Request $request, Closure $next, ?string $redirectToRoute = null, ?int $passwordTimeoutSeconds = null): mixed {
         /** Bypass the middleware if the request is to the lock screen */
         if ("/{$request->route()?->uri()}" === route(config('lockscreen.route'), absolute: false)) {
             return $next($request);
@@ -54,7 +54,7 @@ class LockScreen
     /**
      * Determine if the account has been locked due to inactivity.
      */
-    protected function shouldConfirmPassword(Request $request, int $passwordTimeoutSeconds = null): bool {
+    protected function shouldConfirmPassword(Request $request, ?int $passwordTimeoutSeconds = null): bool {
         if (!$request->session()->has('auth.latest_activity_at')) {
             return false;
         }
