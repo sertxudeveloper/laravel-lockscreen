@@ -19,8 +19,7 @@ class LockScreen
         protected ResponseFactory $responseFactory,
         protected UrlGenerator $urlGenerator,
         protected ?int $passwordTimeout = null,
-    ) {
-    }
+    ) {}
 
     /**
      * Handle an incoming request.
